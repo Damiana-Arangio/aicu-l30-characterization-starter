@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Support Control - Ticket</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="side-nav" aria-label="Navigazione principale">
+        <div class="brand-mark" aria-hidden="true">S</div>
+        <button class="nav-button active" type="button" aria-label="Dashboard">▦</button>
+        <button class="nav-button" type="button" aria-label="Inbox">□</button>
+        <button class="nav-button" type="button" aria-label="Report">⌁</button>
+        <div class="nav-spacer"></div>
+        <button class="nav-button" type="button" aria-label="Impostazioni">⚙</button>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Support operations</p>
+            <h1>Dashboard ticket</h1>
+          </div>
+          <div class="operator">
+            <span class="avatar">GR</span>
+            <div>
+              <span>Operatore</span>
+              <strong>Giulia Rinaldi</strong>
+            </div>
+          </div>
+        </header>
+
+        <section class="summary-grid" aria-label="Riepilogo ticket">
+          <article>
+            <span>Ticket visibili</span>
+            <strong id="total-count">-</strong>
+          </article>
+          <article>
+            <span>Alta priorità</span>
+            <strong id="high-count">-</strong>
+          </article>
+          <article>
+            <span>Richiedono attenzione</span>
+            <strong id="attention-count">-</strong>
+          </article>
+        </section>
+
+        <section class="ticket-panel" aria-labelledby="ticket-heading">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Coda operativa</p>
+              <h2 id="ticket-heading">Ticket aperti</h2>
+            </div>
+            <div class="panel-actions">
+              <label class="search-field">
+                <span class="sr-only">Cerca ticket</span>
+                <input id="search-input" type="search" placeholder="Cerca per titolo o cliente" />
+              </label>
+              <button id="reload-button" class="secondary-button" type="button">Aggiorna</button>
+            </div>
+          </div>
+
+          <div id="loading-state" class="loading-state" role="status">
+            <span class="spinner" aria-hidden="true"></span>
+            <div>
+              <strong>Caricamento dashboard</strong>
+              <span>Stiamo preparando ticket e riepiloghi.</span>
+            </div>
+          </div>
+
+          <div id="error-state" class="error-state" hidden>
+            <strong>Impossibile caricare i ticket</strong>
+            <span>Riprova senza ricaricare la pagina.</span>
+          </div>
+
+          <div id="ticket-table-wrap" class="table-wrap" hidden>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Ticket</th>
+                  <th>Priorità</th>
+                  <th>Canale</th>
+                  <th>Riepilogo</th>
+                  <th><span class="sr-only">Azioni</span></th>
+                </tr>
+              </thead>
+              <tbody id="ticket-rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="detail-dialog" class="detail-dialog">
+      <form method="dialog" class="dialog-header">
+        <div>
+          <p class="eyebrow">Dettaglio ticket</p>
+          <h2 id="detail-title">Ticket</h2>
+        </div>
+        <button class="icon-button" aria-label="Chiudi dettaglio">×</button>
+      </form>
+      <div id="detail-content" class="dialog-content"></div>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
