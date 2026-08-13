@@ -22,5 +22,29 @@ test("GET /api/tickets preserves the observable dashboard order", async (t) => {
   );
 });
 
-// Percorso avanzato: affrontalo dopo i tre test essenziali.
-test.todo("GET /api/tickets preserves the fields consumed by the dashboard");
+test("GET /api/tickets preserves the fields consumed by the dashboard", async (t) => {
+  const baseUrl = await startApplication(t);
+  const response = await fetch(`${baseUrl}/api/tickets`);
+  const payload = await response.json();
+  const consumedFields = [
+    "id",
+    "title",
+    "customer",
+    "description",
+    "priority",
+    "sourceChannel",
+    "urgencyLabel",
+    "summary",
+  ];
+
+  assert.equal(response.status, 200);
+
+  for (const ticket of payload.tickets) {
+    for (const field of consumedFields) {
+      assert.ok(
+        Object.hasOwn(ticket, field),
+        `${ticket.id ?? "Ticket without id"} is missing ${field}`
+      );
+    }
+  }
+});
