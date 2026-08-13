@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { filterTickets } from "../../src/dashboard-model.js";
+import {
+  filterTickets,
+  summarizeTickets,
+} from "../../src/dashboard-model.js";
 
 test("filterTickets keeps matching independent from uppercase and surrounding spaces", () => {
   const tickets = [
@@ -25,4 +28,12 @@ test("filterTickets keeps matching independent from uppercase and surrounding sp
   );
 });
 
-test.todo("summarizeTickets returns zero counts for an empty ticket list");
+test("summarizeTickets returns zero counts for an empty ticket list", () => {
+  const result = summarizeTickets([]);
+
+  assert.deepEqual(result, {
+    total: 0,
+    highPriority: 0,
+    requiresAttention: 0,
+  });
+});
